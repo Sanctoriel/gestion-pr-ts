@@ -204,10 +204,10 @@ form input:not([type="hidden"]) {
 #historiqueRemboursements li {
     margin-bottom: 5px;
     font-size: 0.95em;
-}/* --- Media Query pour les petits écrans (Smartphones) --- */
+}/* --- Media Query pour les Smartphones (écrans max 768px) --- */
 @media (max-width: 768px) {
     
-    /* Le conteneur occupe toute la largeur */
+    /* 1. Rendre le conteneur plein écran */
     .container {
         padding: 10px;
         margin: 0;
@@ -215,29 +215,84 @@ form input:not([type="hidden"]) {
         box-shadow: none;
     }
 
-    /* Le tableau devient défilant (scroll horizontal) */
-    .table-container {
-        overflow-x: scroll; /* Permet de faire défiler le tableau si trop large */
+    /* 2. Transformation du Tableau en Cartes */
+    
+    table, thead, tbody, th, td, tr {
+        display: block; /* Chaque élément du tableau devient un bloc */
     }
 
-    /* Le tableau des prêts s'affiche sur une seule ligne */
-    table {
-        min-width: 700px; /* Assure que le tableau ne s'écrase pas trop */
+    thead tr {
+        position: absolute;
+        top: -9999px; /* Cache l'en-tête du tableau */
+        left: -9999px;
     }
 
-    /* Les modales deviennent pleine largeur et moins hautes pour les petits écrans */
+    tr {
+        border: 1px solid #ccc; /* Séparation visuelle de chaque prêt */
+        margin-bottom: 15px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    td {
+        border: none; /* Supprime les bordures de cellule */
+        position: relative;
+        padding-left: 50%; /* Laisse de la place pour l'étiquette (label) */
+        text-align: right;
+        font-size: 14px;
+    }
+    
+    /* 3. Ajout des Étiquettes (Labels) dans les Cellules */
+    td:before {
+        /* Ceci génère le titre de la colonne (ex: "Nom & Prénoms :") */
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        text-align: left;
+        font-weight: bold;
+        color: #333;
+    }
+
+    /* 4. Définition des Étiquettes (Labels) pour chaque colonne */
+    /* Ces labels remplacent l'en-tête du tableau caché */
+    
+    /* Colonne 1 : Nom & Prénoms */
+    td:nth-of-type(1):before { content: "Nom & Prénoms :"; }
+    /* Colonne 2 : Principal */
+    td:nth-of-type(2):before { content: "Principal :"; }
+    /* Colonne 3 : Total Dû (15%) */
+    td:nth-of-type(3):before { content: "Total Dû (15%) :"; }
+    /* Colonne 4 : Échéance */
+    td:nth-of-type(4):before { content: "Échéance :"; }
+    /* Colonne 5 : Reste à Payer */
+    td:nth-of-type(5):before { content: "Reste à Payer :"; }
+    /* Colonne 6 : Statut */
+    td:nth-of-type(6):before { content: "Statut :"; }
+    /* Colonne 7 : Action */
+    td:nth-of-type(7) { text-align: left; }
+    td:nth-of-type(7):before { content: " "; } /* Pas de label pour la colonne "Action" */
+
+
+    /* 5. Optimisation des modales de Détails */
     .modal-content {
         width: 95%;
         margin: 5% auto;
     }
     
-    /* La grille des détails passe d'un affichage sur deux colonnes à un affichage sur une colonne */
+    .large-modal {
+        max-width: 95%; /* S'assure que la modale de détails ne déborde pas */
+    }
+
     .details-grid {
-        grid-template-columns: 1fr; /* Une seule colonne */
+        grid-template-columns: 1fr; /* Passage à une seule colonne pour les détails */
+        grid-gap: 10px;
     }
     
-    /* Les grands nombres sont ajustés pour ne pas être trop volumineux */
-    .big-number {
-        font-size: 1.2em;
+    .info-block {
+        padding: 10px;
     }
+}
 }
