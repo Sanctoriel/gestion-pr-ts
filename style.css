@@ -1,0 +1,243 @@
+/* (Code CSS précédent, avec les mêmes variables de couleurs...) */
+:root {
+    --couleur-primaire: #007bff; /* Bleu */
+    --couleur-secondaire: #6c757d; /* Gris */
+    --couleur-succes: #28a745; /* Vert */
+    --couleur-danger: #dc3545; /* Rouge */
+    --couleur-attention: #ffc107; /* Jaune/Orange */
+    --couleur-fond: #f8f9fa;
+    --couleur-bordure: #dee2e6;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--couleur-fond);
+    color: #343a40;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: var(--couleur-primaire);
+    border-bottom: 2px solid var(--couleur-bordure);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* --- Boutons CTA et Tableau (Styles inchangés) --- */
+.cta-button {
+    background-color: var(--couleur-succes);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cta-button:hover {
+    background-color: #1e7e34;
+}
+
+.details-button {
+    background-color: var(--couleur-primaire);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid var(--couleur-bordure);
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--couleur-primaire);
+    color: white;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* --- Statut (Pastilles de couleur) --- */
+.statut-paye { color: white; background-color: var(--couleur-succes); padding: 4px 8px; border-radius: 3px; font-size: 0.9em; }
+.statut-encours { color: white; background-color: var(--couleur-attention); padding: 4px 8px; border-radius: 3px; font-size: 0.9em; }
+.statut-echu { color: white; background-color: var(--couleur-danger); padding: 4px 8px; border-radius: 3px; font-size: 0.9em; }
+
+/* --- Modale générale --- */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 10; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 8% auto; 
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px; /* Taille par défaut pour le formulaire d'ajout */
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.large-modal {
+    max-width: 900px !important; /* Taille agrandie pour les détails */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+form label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+form input:not([type="hidden"]) {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.submit-button {
+    background-color: var(--couleur-primaire);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.taux-info {
+    font-size: 0.9em;
+    color: var(--couleur-danger);
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* --- Styles spécifiques aux Détails du Prêt (Grid Layout) --- */
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.info-block {
+    padding: 15px;
+    border: 1px solid var(--couleur-bordure);
+    border-radius: 5px;
+}
+
+.calculation-block {
+    background-color: #f0f8ff; /* Bleu très clair */
+}
+
+.large-block {
+    grid-column: 1 / -1; /* Prend toute la largeur sur deux colonnes */
+}
+
+.big-number {
+    font-size: 1.5em;
+    color: var(--couleur-danger);
+    font-weight: bold;
+}
+
+#historiqueRemboursements {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+#historiqueRemboursements li {
+    margin-bottom: 5px;
+    font-size: 0.95em;
+}/* --- Media Query pour les petits écrans (Smartphones) --- */
+@media (max-width: 768px) {
+    
+    /* Le conteneur occupe toute la largeur */
+    .container {
+        padding: 10px;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    /* Le tableau devient défilant (scroll horizontal) */
+    .table-container {
+        overflow-x: scroll; /* Permet de faire défiler le tableau si trop large */
+    }
+
+    /* Le tableau des prêts s'affiche sur une seule ligne */
+    table {
+        min-width: 700px; /* Assure que le tableau ne s'écrase pas trop */
+    }
+
+    /* Les modales deviennent pleine largeur et moins hautes pour les petits écrans */
+    .modal-content {
+        width: 95%;
+        margin: 5% auto;
+    }
+    
+    /* La grille des détails passe d'un affichage sur deux colonnes à un affichage sur une colonne */
+    .details-grid {
+        grid-template-columns: 1fr; /* Une seule colonne */
+    }
+    
+    /* Les grands nombres sont ajustés pour ne pas être trop volumineux */
+    .big-number {
+        font-size: 1.2em;
+    }
+}
